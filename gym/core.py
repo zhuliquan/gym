@@ -16,6 +16,7 @@ class Env(object):
 
     The main API methods that users of this class need to know are:
 
+        transform
         step
         reset
         render
@@ -43,6 +44,26 @@ class Env(object):
     # Set these in ALL subclasses
     action_space = None
     observation_space = None
+
+    def transform(self,state,action):
+        '''
+        Run one timestep of the environment's dynamics. When end of
+        episode is reached, you are responsible for calling `transform()`
+        to reset args state.
+
+        Accepts an state and action returns a tuple(observation,reward,done,info).
+
+        Args:
+            state (object):an state provided by the anvironment
+
+        Returns:
+            Returns:
+            observation (object): agent's observation of the current environment
+            reward (float) : amount of reward returned after previous action
+            done (boolean): whether the episode has ended, in which case further step() calls will return undefined results
+            info (dict): contains auxiliary diagnostic information (helpful for debugging, and sometimes learning)
+        '''
+        raise NotImplementedError
 
     def step(self, action):
         """Run one timestep of the environment's dynamics. When end of
